@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682459009670",
+    "project_id": "app-programmierung-316a8",
+    "storage_bucket": "app-programmierung-316a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682459009670:android:aff0708a90b5ad5c00b707",
+        "android_client_info": {
+          "package_name": "com.example.preiser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682459009670-406shenmq515d97bpt62mpr4dqrcvdg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyActEFse-DzT-k4X2ASoo-oqzbfDOxO3aU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682459009670-406shenmq515d97bpt62mpr4dqrcvdg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
