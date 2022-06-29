@@ -7,15 +7,15 @@ class AuthService {
 
   //create User object based on FirebaseUser
   Benutzer _userFromUser(Benutzer user) {
-    return user != null ? Benutzer(uid: user.uid) : null;
+    return user = Benutzer(uid: user.uid);
 
     //auth change user stream
-    Stream<Benutzer> get user {
-      return _auth.onAuthStateChanged;
+    //Stream<Benutzer> get user {
+      //return _auth.onAuthStateChanged;
       //.map((FirebaseUser user) => _userFromFirebaseUser(user)); = ist das gleiche
-      .map(_userFromUser);
+      //.map(_userFromUser);
   }
-  }
+
 
   //sign in anon
   Future signInAnon() async {
