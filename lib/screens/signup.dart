@@ -64,6 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       password: _passwordTextController.text).then((value) {
                         //Datenbankeintrag
 
+                        AuthenticationService.insertStudent(_userNameTextController.text, _emailTextController.text, AuthenticationService.getStudentID());
+
                         Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
                   }).onError((error, stackTrace) {

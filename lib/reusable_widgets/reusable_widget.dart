@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 Image logoWidget(String imageName) {
   return Image.asset(imageName,
@@ -54,7 +56,28 @@ Container firebaseButton(BuildContext context, String title, Function onTap) {
   );
   }
 
-  //bool 18/16 hinzufügen??????????????????????
-  void insertStudent(String Benutzername, String Passwort, String Email, String Paypal, String? ID, ) {
+class AuthenticationService {
 
+  final FirebaseAuth _firebaseAuth;
+
+  AuthenticationService(this._firebaseAuth);
+
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  final databaseRef = FirebaseDatabase.instance.ref();
+
+  //bool 18/16 hinzufügen??????????????????????
+  void insertStudent(String Benutzername,
+      String Paypal, String? StudentID,) {
+    databaseRef.child("Student/$StudentID").set({
+      "Benutzername": Benutzername,
+      "Paypal": Paypal,
+    }
+    );
   }
+
+  String? getStudentID() {
+    final User? userx = _firebaseAuth.currentUser;
+    final userID = userx?.uid;
+    return userID;
+  }
+}
