@@ -1,4 +1,5 @@
 import 'package:DHBuyW/screens/home_screen.dart';
+import 'package:DHBuyW/screens/reset_password.dart';
 import 'package:DHBuyW/screens/signup.dart';
 import 'package:DHBuyW/utils/color_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,9 +56,11 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             reusableTextField("Enter Password", Icons.lock_outline, true, _passwordTextController),
               const SizedBox(
-                height: 20,
+                height: 3,
               ),
-              signInSignUpButton(context, true, () {
+              //Forgot Password
+              forgetPassword(context),
+              firebaseButton(context, "Sign In", () {
                 FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailTextController.text,
                     password: _passwordTextController.text).then((value) {
                       Navigator.push(context,
@@ -96,6 +99,22 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: Text("Passwort vergessen?",
+          style: TextStyle(color: Colors.white70),
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ResetPasswordScreen())),
+      ),
     );
   }
 }

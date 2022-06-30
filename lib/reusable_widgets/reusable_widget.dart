@@ -29,7 +29,7 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType, Tex
 }
 
 //Buttons
-Container signInSignUpButton(BuildContext context, bool isLogin, Function onTap) {
+Container firebaseButton(BuildContext context, String title, Function onTap) {
   return Container(width: MediaQuery.of(context).size.width,
   height: 50,
       margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
@@ -37,7 +37,9 @@ Container signInSignUpButton(BuildContext context, bool isLogin, Function onTap)
     child: ElevatedButton(onPressed: () {
       onTap();
       },
-    child: Text(isLogin ? 'LOG IN' : 'SIGN UP', style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+    child: Text(
+      title,
+      style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
     ),
   style: ButtonStyle(
     backgroundColor: MaterialStateProperty.resolveWith((states) {
@@ -50,4 +52,9 @@ Container signInSignUpButton(BuildContext context, bool isLogin, Function onTap)
   RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
   ),
   );
+  }
+
+  //bool 18/16 hinzufügen??????????????????????
+  void insertStudent(String Benutzername, String Passwort, String Email, String Paypal, String? ID, ) {
+
   }
