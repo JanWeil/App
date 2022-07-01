@@ -43,13 +43,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(
                   height: 20,
                 ),
+                //Form Validation?????????????????????????!!!!!!!!!!!!!!!
                 reusableTextField("Enter Email ID", Icons.person_outline, false, _emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
                 //Reset Button
                 firebaseButton(context, "Zurücksetzen", () {
-                  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text);
+                  FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text)
+                      .then((value) => Navigator.of(context).pop());
                 })
               ],
             ),
