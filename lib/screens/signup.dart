@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:DHBuyW/reusable_widgets/reusable_widget.dart';
 import 'package:DHBuyW/screens/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _userNameTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _paypalTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +29,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     ),
       body: Container(
-      width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-        hexStringToColor("CB2B93"),
-        hexStringToColor("9546C4"),
-        hexStringToColor("5E61F4")
-        ],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter)
+            gradient: LinearGradient(colors: [
+              hexStringToColor("CB2B93"),
+              hexStringToColor("9546C4"),
+              hexStringToColor("5E61F4")
+            ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter)
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -58,18 +60,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
+                reusableTextField("Enter PayPal Link", Icons.cached_outlined, true, _paypalTextController),
+                const SizedBox(
+                  height: 20,
+                ),
                 firebaseButton(context, "Sign Up", () {
                   //Signup (User erstellen)
-                  FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailTextController.text,
+                  FirebaseAuth.instance.createUserWithEmailAndPassword(
+                      email: _emailTextController.text,
                       password: _passwordTextController.text).then((value) {
                         //Datenbankeintrag
 
-                      //  AuthenticationService.insertStudent(_userNameTextController.text, _emailTextController.text, AuthenticationService.getStudentID());
+                    addUserDetails(
+                    _userNameTextController.text.trim(),
+                        _emailTextController.text.trim(),
+                      _passwordTextController.text.trim(),
+                      _paypalTextController.text.trim(),
 
-                        Navigator.push(context,
+                    );
+
+                    Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
                   });
                 })
               ],
@@ -79,4 +90,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+  Future addUserDetails(String userName, String email, String password, String paypal) async {
+    await FirebaseFirestore.instance.collection('user').add({
+      'userName': userName,
+      'password': password,
+      'email': email,
+      'paypal': paypal,
+    });
+  }
+
 }

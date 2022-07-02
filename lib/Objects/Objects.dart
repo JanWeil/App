@@ -3,20 +3,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class Products extends StatefulWidget {
-  const Products({Key? key}) : super(key: key);
+class EINFÜGEN extends StatefulWidget {
+  const EINFÜGEN({Key? key}) : super(key: key);
 
   @override
-  _ProductsState createState() => _ProductsState();
+  _EINFÜGENState createState() => _EINFÜGENState();
 }
 
-class _ProductsState extends State<Products> {
+class _EINFÜGENState extends State<EINFÜGEN> {
 // text fields' controllers
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
 
-  final CollectionReference _products =
-  FirebaseFirestore.instance.collection('products');
+  final CollectionReference _EINFÜGEN =
+  FirebaseFirestore.instance.collection('EINFÜGEN');
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
 
@@ -56,7 +56,7 @@ class _ProductsState extends State<Products> {
                     final double? price =
                     double.tryParse(_priceController.text);
                     if (price != null) {
-                      await _products.add({"name": name, "price": price});
+                      await _EINFÜGEN.add({"name": name, "price": price});
 
                       _nameController.text = '';
                       _priceController.text = '';
@@ -140,7 +140,7 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text('Firebase Firestore')),
+          title: const Center(child: Text('Products')),
         ),
         body: StreamBuilder(
           stream: _products.snapshots(),
