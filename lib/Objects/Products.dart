@@ -280,10 +280,15 @@ class _ProductsState extends State<Products> {
 
                                         //   final user = documentSnapshot["userName"];
                                       //    return documentSnapshot["userName"];
-
                                         });
                                        };
-                                      await FirebaseFirestore.instance.collection('list').add({'userName' : uid, 'ProduktName' : documentSnapshot["name"]});
+                                      await FirebaseFirestore.instance.collection('list').add({'userName' : uid, 'ProduktName' : documentSnapshot["name"],'Preis' : documentSnapshot["price"],'Laden' : documentSnapshot["store"]});
+
+                                  //    FirebaseFirestore.instance.collection("list").snapshots().forEach((element) {
+                                   //     for (QueryDocumentSnapshot snapshot in element.docs) {
+                                   //       snapshot.reference.delete();
+                                  //      }
+                                 //     });
 
                                       //Anzahl erhÃ¶hen
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => ThanksWidget()));
