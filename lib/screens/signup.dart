@@ -33,9 +33,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              hexStringToColor("CB2B93"),
-              hexStringToColor("9546C4"),
-              hexStringToColor("5E61F4")
+              hexStringToColor("B71C1C"),
+              hexStringToColor("F78181"),
+              hexStringToColor("F6CECE")
             ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)
@@ -69,11 +69,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: _emailTextController.text,
                       password: _passwordTextController.text).then((value) {
-                        //Datenbankeintrag
+                    //Datenbankeintrag
 
                     addUserDetails(
-                    _userNameTextController.text.trim(),
-                        _emailTextController.text.trim(),
+                      _userNameTextController.text.trim(),
+                      _emailTextController.text.trim(),
                       _passwordTextController.text.trim(),
                       _paypalTextController.text.trim(),
 

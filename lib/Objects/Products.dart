@@ -6,6 +6,7 @@ import 'package:DHBuyW/screens/basket_screen.dart';
 import 'package:DHBuyW/screens/home_screen.dart';
 import 'package:DHBuyW/Objects/List.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:DHBuyW/screens/congrats.dart';
 
 
 class Products extends StatefulWidget {
@@ -180,7 +181,7 @@ class _ProductsState extends State<Products> {
                 MaterialPageRoute(builder: (context) => AuswahlWidget()));
           },
         ),
-        title:  Text('Firebase Firestore',
+        title:  Text('Produkte',
           style: TextStyle(
               fontFamily: 'Poppins',
               color: Colors.white,
@@ -188,17 +189,7 @@ class _ProductsState extends State<Products> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white,
-                size: 30
-            ),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BasketWidget()));
-            },
-          )
+
         ],
         centerTitle: true,
         elevation: 2,
@@ -295,9 +286,13 @@ class _ProductsState extends State<Products> {
                                       await FirebaseFirestore.instance.collection('list').add({'userName' : uid, 'ProduktName' : documentSnapshot["name"]});
 
                                       //Anzahl erhÃ¶hen
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => ThanksWidget()));
                                       print('Hinzufügen ...');
                                     },
                                     child: Text('Hinzufügen'),
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(hexStringToColor("F78181")),
+                                    ),
                                   ),
                                   Expanded(child: Column(
                                     mainAxisSize: MainAxisSize.max,

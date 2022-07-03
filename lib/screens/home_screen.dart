@@ -1,12 +1,16 @@
 import 'package:DHBuyW/Objects/Pool.dart';
+import 'package:DHBuyW/reusable_widgets/reusable_widget.dart';
 import 'package:DHBuyW/screens/basket_screen.dart';
 import 'package:DHBuyW/screens/congrats.dart';
 import 'package:DHBuyW/screens/laden_screen.dart';
 import 'package:DHBuyW/screens/list_screen.dart';
 import 'package:DHBuyW/screens/shopping_screen.dart';
+import 'package:DHBuyW/screens/signin_screen.dart';
 import 'package:DHBuyW/utils/color_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:DHBuyW/Objects/Pool.dart';
+import 'package:DHBuyW/Objects/Products.dart';
+import 'package:DHBuyW/Objects/List.dart';
 
 class AuswahlWidget extends StatefulWidget {
   const AuswahlWidget({Key? key}) : super(key: key);
@@ -26,14 +30,28 @@ class _AuswahlWidgetState extends State<AuswahlWidget> {
         backgroundColor: Color(0xFFB71C1C),
         automaticallyImplyLeading: false,
         title: Text(
-          'Home',
+          'DHBuyW',
           style: TextStyle(
             fontFamily: 'Poppins',
             color: Colors.white,
             fontSize: 22,
           ),
         ),
-        actions: [],
+        actions: [
+          IconButton(
+            icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+                size: 30
+            ),
+            onPressed: () {
+              FirebaseAuth.instance.signOut().then((value) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()));
+              });
+            },
+          )
+        ],
         centerTitle: true,
         elevation: 2,
       ),
@@ -41,10 +59,15 @@ class _AuswahlWidgetState extends State<AuswahlWidget> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 120, 20, 0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 20,
+              ),
 
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(24, 8, 0, 0),
@@ -74,7 +97,7 @@ class _AuswahlWidgetState extends State<AuswahlWidget> {
                             onPressed: () {
                               print('Button pressed ...');
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => HomeScreen()));
+                                  MaterialPageRoute(builder: (context) => Products()));
                             },
                             child: Text('Bestellen',
                                 style: TextStyle(
@@ -108,7 +131,7 @@ class _AuswahlWidgetState extends State<AuswahlWidget> {
                         onPressed: () {
                           print('Button pressed ...');
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => ListWidget()));
+                              MaterialPageRoute(builder: (context) => EinkaufsList()));
                         },
                         child: Text('Einkaufsliste anzeigen', style: TextStyle(color: Colors.black54),),
                         style: ButtonStyle(
@@ -121,6 +144,7 @@ class _AuswahlWidgetState extends State<AuswahlWidget> {
               ),
             ],
           ),
+      ),
         ),
       ),
     );

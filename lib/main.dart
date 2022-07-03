@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DHBuyW',
-      //home: const SignInScreen(),
-      home: Products(),
+      home: const SignInScreen(),
     );
   }
 }

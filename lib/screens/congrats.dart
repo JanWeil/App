@@ -69,11 +69,14 @@ class _ThanksWidgetState extends State<ThanksWidget> {
                   child: Text(
                     'Zurück',
                     style: TextStyle(
-                      color: Color(0x82B71C1C),
+                      color: Colors.black26,
                       fontSize: 16,
                       fontFamily: 'Outfit',
                       fontWeight: FontWeight.normal
                     ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(hexStringToColor("FFFFFF")),
                   ),
                 ),
               ),
