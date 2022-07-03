@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:DHBuyW/Objects/Order.dart';
 import 'package:DHBuyW/Objects/List.dart';
+import 'package:DHBuyW/screens/congrats.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DHBuyW',
       //home: const SignInScreen(),
-      home: AuswahlWidget(),
+      home: Products(),
     );
   }
 }

@@ -91,7 +91,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
   Future addUserDetails(String userName, String email, String password, String paypal) async {
-    await FirebaseFirestore.instance.collection('user').add({
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user?.uid;
+
+    await FirebaseFirestore.instance.collection('user').doc(uid).set({
       'userName': userName,
       'password': password,
       'email': email,

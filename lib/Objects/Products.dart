@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:DHBuyW/utils/color_utils.dart';
 import 'package:DHBuyW/screens/basket_screen.dart';
 import 'package:DHBuyW/screens/home_screen.dart';
+import 'package:DHBuyW/Objects/List.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class Products extends StatefulWidget {
@@ -273,11 +275,29 @@ class _ProductsState extends State<Products> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   ElevatedButton(
-                                    onPressed: () {
+                                    onPressed: () async{
+
+                                      final FirebaseAuth auth = FirebaseAuth.instance;
+                                      final User? user = auth.currentUser;
+                                      final uid = user?.uid;
+
+                                       getUsername(){
+
+                                        FirebaseFirestore.instance.collection("user").doc(uid).get()
+                                            .then((DocumentSnapshot documentSnapshot) async{
+                                           print(documentSnapshot["userName"]);
+
+                                        //   final user = documentSnapshot["userName"];
+                                      //    return documentSnapshot["userName"];
+
+                                        });
+                                       };
+                                      await FirebaseFirestore.instance.collection('list').add({'userName' : uid, 'ProduktName' : documentSnapshot["name"]});
+
                                       //Anzahl erhÃ¶hen
-                                      print('HinzufÃ¼gen ...');
+                                      print('Hinzufügen ...');
                                     },
-                                    child: Text('HinzufÃ¼gen'),
+                                    child: Text('Hinzufügen'),
                                   ),
                                   Expanded(child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -287,7 +307,7 @@ class _ProductsState extends State<Products> {
                                       Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                                         child: Text(
                                           //Datenbankzugriff
-                                          documentSnapshot['price'].toString()+' â‚¬',
+                                          documentSnapshot['price'].toString()+' €',
                                           style: TextStyle(
                                             fontFamily: 'Lexend Daca',
                                             color: Colors.black87,
