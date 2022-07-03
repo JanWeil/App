@@ -11,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:DHBuyW/Objects/Products.dart';
 import 'package:DHBuyW/Objects/List.dart';
+import 'package:DHBuyW/screens/settings_screen.dart';
 
 class AuswahlWidget extends StatefulWidget {
   const AuswahlWidget({Key? key}) : super(key: key);
