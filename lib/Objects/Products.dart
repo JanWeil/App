@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:DHBuyW/utils/color_utils.dart';
+import 'package:DHBuyW/screens/basket_screen.dart';
+import 'package:DHBuyW/screens/home_screen.dart';
 
 
 class Products extends StatefulWidget {
@@ -69,9 +72,9 @@ class _ProductsState extends State<Products> {
                   child: const Text('Create'),
                   onPressed: () async {
                     final String name = _nameController.text;
-                //    final String image = _nameController.text;
+                    //    final String image = _nameController.text;
                     final String store = _storeController.text;
-                  //  final String description = _nameController.text;
+                    //  final String description = _nameController.text;
                     final double? price =
                     double.tryParse(_priceController.text);
                     if (price != null) {
@@ -90,6 +93,8 @@ class _ProductsState extends State<Products> {
 
         });
   }
+
+
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
 
@@ -160,8 +165,43 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text('Firebase Firestore')),
+          backgroundColor: Color(0xFFB71C1C),
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AuswahlWidget()));
+            },
+          ),
+          title:  Text('Firebase Firestore',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            color: Colors.white,
+            fontSize: 22
+          ),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+                color: Colors.white,
+                size: 30
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => BasketWidget()));
+              },
+            )
+          ],
+          centerTitle: true,
+          elevation: 2,
         ),
+        backgroundColor: Colors.white,
         body: StreamBuilder(
           stream: _products.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -172,27 +212,117 @@ class _ProductsState extends State<Products> {
                   final DocumentSnapshot documentSnapshot =
                   streamSnapshot.data!.docs[index];
                   return Card(
-                    margin: const EdgeInsets.all(10),
-                    child: ListTile(
-                      title: Text(documentSnapshot['name']),
-                      subtitle: Text(documentSnapshot['price'].toString()),
-                      trailing: SizedBox(
-                        width: 100,
-                        child: Row(
-                          children: [
-                            IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: () =>
-                                    _update(documentSnapshot)),
-                            IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () =>
-                                    _delete(documentSnapshot.id)),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 300,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [BoxShadow(
+                            blurRadius: 3,
+                            color: Color(0x3300000),
+                            offset: Offset(0,2),
+                          )
                           ],
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(8)
+                            ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                        //Datenbankzugriff!!?
+                                        'Produktname',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Colors.black87,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                      )
+                                  )
+                                ],
+                              ),
+                              ),
+                              Divider(),
+                              //Produktbild einfügen
+                              Image.network('https://picsum.photos/seed/206/600',
+                                width: 150,
+                                  height: 150,
+                                  fit: BoxFit.cover
+                              ),
+                              Expanded(child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(16, 3, 16, 16),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        //Anzahl erhöhen
+                                        print('Hinzufügen ...');
+                                      },
+                                      child: Text('Hinzufügen'),
+                                    ),
+                                    Expanded(child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                                        child: Text(
+                                            //Datenbankzugriff
+                                          documentSnapshot['price'].toString()+' €',
+                                          style: TextStyle(
+                                            fontFamily: 'Lexend Daca',
+                                            color: Colors.black87,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        ),
+                                        Text(
+                                          //Datenbankzugriff
+                                          'Anzahl',
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                            fontFamily: 'Lexend Daca',
+                                            color: Colors.grey,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   );
+
+
+
                 },
               );
             }
@@ -202,13 +332,6 @@ class _ProductsState extends State<Products> {
             );
           },
         ),
-// Add new product
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _create(),
-          child: const Icon(Icons.add),
-
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
     );
   }
 }

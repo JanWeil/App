@@ -24,7 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          "Log In",
+          "",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
@@ -33,9 +33,9 @@ class _SignInScreenState extends State<SignInScreen> {
         height: MediaQuery.of(context).size.height,
         //Hintergrund
         decoration: BoxDecoration(gradient: LinearGradient(colors:
-        [hexStringToColor("CB2B93"),
-          hexStringToColor("9546C4"),
-          hexStringToColor("5E61F4")
+        [hexStringToColor("B71C1C"),
+          hexStringToColor("F78181"),
+          hexStringToColor("F6CECE")
         ],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter),
@@ -46,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Column(
             children: <Widget> [
               //Logo einfügen mit name in assets images ordner
-              //logoWidget("assets/image/logo.png"),
+              logoWidget('assets/images/applogo.png'),
               const SizedBox(
                 height: 20,
               ),
@@ -64,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailTextController.text,
                     password: _passwordTextController.text).then((value) {
                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                      MaterialPageRoute(builder: (context) => AuswahlWidget()));
                 }).onError((error, stackTrace) {
                   print("Error ${error.toString()}");
                 });

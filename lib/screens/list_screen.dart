@@ -1,5 +1,6 @@
 import 'package:DHBuyW/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:DHBuyW/utils/color_utils.dart';
 
 class ListWidget extends StatefulWidget {
   const ListWidget({Key? key}) : super(key: key);
@@ -111,10 +112,9 @@ class _ListWidgetState extends State<ListWidget> {
                   children: [
                     Text(
                       'Person 1',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold
-                      ),
+                        style: TextStyle(color: Colors.grey,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)
                     ),
                   ],
                 ),
@@ -145,7 +145,7 @@ class _ListWidgetState extends State<ListWidget> {
                             'Produktname',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 24
+                              fontSize: 16
                             ),
                           ),
                           subtitle: Text(
@@ -294,13 +294,23 @@ class _ListWidgetState extends State<ListWidget> {
                 ],
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 4),
-                child: ElevatedButton(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  child: Text('Abschließen'),
+                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 4),child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print('Button pressed ...');
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AuswahlWidget()));
+                    },
+                    child: Text('Abschließen'),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(hexStringToColor("F78181")),
+                    ),
+                  ),
                 ),
+              ),
               ),
             ],
           ),

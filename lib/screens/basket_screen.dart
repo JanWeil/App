@@ -57,7 +57,7 @@ class _BasketWidgetState extends State<BasketWidget> {
                   child: Text(
                     'Bestellung',
                     style: TextStyle(
-                      color: Colors.black
+                        color: Colors.black
                     ),
                   ),
                 ),
@@ -256,8 +256,8 @@ class _BasketWidgetState extends State<BasketWidget> {
                               'Preis',
                               textAlign: TextAlign.end,
                               style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Color(0x95B71C1C)
+                                  fontFamily: 'Poppins',
+                                  color: Color(0x95B71C1C)
                               ),
                             ),
                           ),
