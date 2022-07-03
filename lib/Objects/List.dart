@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:DHBuyW/screens/home_screen.dart';
+import 'package:DHBuyW/Objects/Products.dart';
 
 
 class EinkaufsList extends StatefulWidget {
@@ -50,10 +51,8 @@ class _EinkaufsListState extends State<EinkaufsList> {
           centerTitle: true,
           elevation: 2,
         ),
+
         body:
-
-
-
         StreamBuilder(
           stream: _list.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -111,7 +110,7 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Person',
+                                  documentSnapshot['userName'],
                                         style: TextStyle(
                                           color: Colors.blueGrey,
                                           fontWeight: FontWeight.bold
@@ -120,7 +119,7 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                       Divider(),
                                       Text(
                                         //Datenbankzugriff
-                                        'Produkt',
+                                       documentSnapshot['Preis'],
                                         style: TextStyle(
                                             color: Colors.black
                                         ),
@@ -129,7 +128,7 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                                         child: Text(
                                           //Datenbankzugriff
-                                          'Anzahl',
+                                          documentSnapshot['Laden'],
                                           style: TextStyle(color: Colors.grey),
                                         ),
                                       ),
@@ -137,7 +136,7 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                                         child: Text(
                                           //Datenbankzugriff
-                                          'Preis',
+                                          'Preis:  '+documentSnapshot['ProduktName'].toString()+' €',
                                           style: TextStyle(color: Colors.redAccent,
                                           fontSize: 12),
                                         ),
@@ -161,6 +160,14 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                     size: 20,
                                   ),
                                   onPressed: () {
+
+                                    Future<void> _delete(String listId) async {
+                                      await _list.doc(listId).delete();
+
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                          content: Text('You have successfully deleted a product')));
+                                    }
+
                                     //delete Funktion für Produkt ausführen
                                   },
                                 ),
