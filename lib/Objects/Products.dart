@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:DHBuyW/utils/color_utils.dart';
-import 'package:DHBuyW/screens/basket_screen.dart';
 import 'package:DHBuyW/screens/home_screen.dart';
-import 'package:DHBuyW/Objects/List.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:DHBuyW/screens/congrats.dart';
 
