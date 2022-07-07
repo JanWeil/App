@@ -86,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
         SizedBox(
           height: 20,
         ),
-        const Text("Dont't habe account? ",
+        const Text("Don't have account? ",
         style: TextStyle(color: Colors.white70)
         ),
         GestureDetector(
@@ -108,7 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
       height: 35,
       alignment: Alignment.bottomRight,
       child: TextButton(
-        child: Text("Passwort vergessen?",
+        child: Text("Forgot password ?",
           style: TextStyle(color: Colors.white70),
           textAlign: TextAlign.right,
         ),

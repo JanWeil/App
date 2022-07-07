@@ -19,7 +19,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: const Text(
-        "Passwort Zurücksetzen",
+        "Reset Password",
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     ),
@@ -49,7 +49,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   height: 20,
                 ),
                 //Reset Button
-                firebaseButton(context, "Zurücksetzen", () {
+                firebaseButton(context, "Reset", () {
                   FirebaseAuth.instance.sendPasswordResetEmail(email: _emailTextController.text)
                       .then((value) => Navigator.of(context).pop());
                 })
