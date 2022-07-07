@@ -117,7 +117,7 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                       Divider(),
                                       Text(
                                         //Datenbankzugriff
-                                       documentSnapshot['Preis'],
+                                       documentSnapshot['ProduktName'],
                                         style: TextStyle(
                                             color: Colors.black
                                         ),
@@ -134,7 +134,7 @@ class _EinkaufsListState extends State<EinkaufsList> {
                                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                                         child: Text(
                                           //Datenbankzugriff
-                                          'Preis:  '+documentSnapshot['ProduktName'].toString()+' €',
+                                          'Preis:  '+documentSnapshot['Preis'].toString()+' €',
                                           style: TextStyle(color: Colors.redAccent,
                                           fontSize: 12),
                                         ),
